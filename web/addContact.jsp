@@ -12,7 +12,8 @@
 </head>
 <body>
 <div style="text-align: center;"><h3>添加联系人</h3></div>
-<form action="${pageContext.request.contextPath}/AddContact" method="post">
+<form action="${pageContext.request.contextPath}/AddContact?userName=${pageContext.request.getParameter("userName")}"
+      method="post">
     <table border="1" width="400px" align="center">
         <tr>
             <td align="center">

@@ -11,7 +11,8 @@
     <title>查询联系人</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/QueryContact" method="post">
+<form action="${pageContext.request.contextPath}/QueryContact?userName=${pageContext.request.getParameter("userName")}"
+      method="post">
     <table align="center" border="1" width="600px">
         <tr>
             <td align="center">输入要查询的联系人姓名</td>

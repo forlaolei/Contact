@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class ContactDaoImpl implements ContactDao {
     @Override
-    public List<Contact> findAll() {
+    public List<Contact> findAll(String userName) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String sql = "select * from contact";
+        String sql = "select * from contact_" + userName;
         List<Contact> list;
         try {
             connection = JdbcUtil.getConnect();
@@ -57,10 +57,11 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
-    public void addContact(Contact contact) {
+    public void addContact(Contact contact, String userName) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into contact(name, age, gender, phone, QQ, email) VALUES (?,?,?,?,?,?);";
+        String sql = "insert into contact_" + userName + "(name, age, gender, phone, QQ, email) VALUES (?,?,?,?,?,?);";
+        System.out.println("用户名" + userName);
         try {
             connection = JdbcUtil.getConnect();
             preparedStatement = connection.prepareStatement(sql);
@@ -79,10 +80,10 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
-    public void deleteContact(int id) {
+    public void deleteContact(int id, String userName) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "delete from contact where id=?;";
+        String sql = "delete from contact_" + userName + " where id=?;";
         try {
             connection = JdbcUtil.getConnect();
             preparedStatement = connection.prepareStatement(sql);
@@ -96,11 +97,11 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
-    public List<Contact> findByName(String name) {
+    public List<Contact> findByName(String name, String userName) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String sql = "select * from contact where name=?";
+        String sql = "select * from contact_" + userName + " where name=?";
         List<Contact> list = new ArrayList<>();
         try {
             connection = JdbcUtil.getConnect();
@@ -135,10 +136,10 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
-    public void UpdateContact(Contact contact) {
+    public void UpdateContact(Contact contact, String userName) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update contact set name=?,age=?,gender=?,phone=?,QQ=?,email=? where id=?;";
+        String sql = "update contact_" + userName + " set name=?,age=?,gender=?,phone=?,QQ=?,email=? where id=?;";
         try {
             connection = JdbcUtil.getConnect();
             preparedStatement = connection.prepareStatement(sql);

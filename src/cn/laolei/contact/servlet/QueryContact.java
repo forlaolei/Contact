@@ -24,9 +24,10 @@ public class QueryContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String name = (String) request.getParameter("name");
+        String name = request.getParameter("name");
         ContactServiceImpl service = new ContactServiceImpl();
-        List<Contact> list = service.findByName(name);
+        String userName = request.getParameter("userName");
+        List<Contact> list = service.findByName(name, userName);
         if (!list.isEmpty()) {
             request.setAttribute("list", list);
             request.getRequestDispatcher("/ShowContact.jsp").forward(request, response);

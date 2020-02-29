@@ -22,7 +22,8 @@ public class DeleteContact extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ContactServiceImpl service = new ContactServiceImpl();
-        service.deleteContact(id);
-        response.sendRedirect(request.getContextPath() + "/ListContact");
+        String userName = request.getParameter("userName");
+        service.deleteContact(id, userName);
+        request.getRequestDispatcher("/ListContact").forward(request, response);
     }
 }

@@ -22,6 +22,8 @@ public class AddContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        String userName = request.getParameter("userName");
+        System.out.println("yhm" + userName);
         String name = request.getParameter("name");
         String age = request.getParameter("age");
         String gender = request.getParameter("gender");
@@ -33,18 +35,17 @@ public class AddContact extends HttpServlet {
         try {
             contact.setAge(Integer.parseInt(age));
         } catch (Exception e) {
-            response.sendRedirect(request.getContextPath() + "/AgeException.jsp");
+            request.getRequestDispatcher("/AgeException.jsp?userName=" + userName).forward(request, response);
             e.printStackTrace();
             return;
         }
-            contact.setGender(gender);
-            contact.setPhone(phone);
-            contact.setQq(qq);
-            contact.setEmail(email);
-            ContactServiceImpl service = new ContactServiceImpl();
-            service.addContact(contact);
-            // 重定向
-            response.sendRedirect(request.getContextPath() + "/ListContact");
-        }
+        contact.setGender(gender);
+        contact.setPhone(phone);
+        contact.setQq(qq);
+        contact.setEmail(email);
+        ContactServiceImpl service = new ContactServiceImpl();
+        service.addContact(contact, userName);
+        request.getRequestDispatcher("/ListContact").forward(request, response);
+    }
 
 }

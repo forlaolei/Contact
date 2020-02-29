@@ -14,27 +14,27 @@ public class ContactServiceImpl implements ContactService {
     ContactDaoImpl dao = new ContactDaoImpl();
 
     @Override
-    public List<Contact> findAll() {
-        return dao.findAll();
+    public List<Contact> findAll(String userName) {
+        return dao.findAll(userName);
     }
 
     @Override
-    public void addContact(Contact contact) {
-        dao.addContact(contact);
+    public void addContact(Contact contact, String userName) {
+        dao.addContact(contact, userName);
     }
 
     @Override
-    public void deleteContact(int id) {
-        dao.deleteContact(id);
+    public void deleteContact(int id, String userName) {
+        dao.deleteContact(id, userName);
     }
 
     @Override
-    public List<Contact> findByName(String name) {
-        return dao.findByName(name);
+    public List<Contact> findByName(String name, String userName) {
+        return dao.findByName(name, userName);
     }
 
     @Override
-    public void UpdateContact(Contact contact) {
-        dao.UpdateContact(contact);
+    public void UpdateContact(Contact contact, String userName) {
+        dao.UpdateContact(contact, userName);
     }
 }

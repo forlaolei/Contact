@@ -36,19 +36,18 @@ public class DealLogin extends HttpServlet {
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet);
             // 移动光标，判断结果集
             if (resultSet.next()) {
                 if (resultSet.getString("userName").equals(userName) &&
                         resultSet.getString("password").equals(password)) {
                     // 重定向
-                    resp.sendRedirect(req.getContextPath() + "/ListContact");
+                    resp.sendRedirect(req.getContextPath() + "/ListContact?userName=" + userName);
                 } else {
                     // 重定向
-                    resp.sendRedirect(req.getContextPath() + "/login.jsp");
+                    resp.sendRedirect(req.getContextPath() + "/loginFail.jsp");
                 }
             } else {
-                resp.sendRedirect(req.getContextPath() + "/login.jsp");
+                resp.sendRedirect(req.getContextPath() + "/loginFail.jsp");
             }
 
         } catch (SQLException e) {

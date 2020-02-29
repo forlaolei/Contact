@@ -31,7 +31,8 @@ public class UpdateContact extends HttpServlet {
         String email = request.getParameter("email");
         Contact contact = new Contact(id, name, age, gender, phone, qq, email);
         ContactServiceImpl service = new ContactServiceImpl();
-        service.UpdateContact(contact);
-        response.sendRedirect(request.getContextPath() + "/ListContact");
+        String userName = request.getParameter("userName");
+        service.UpdateContact(contact, userName);
+        request.getRequestDispatcher("/ListContact").forward(request, response);
     }
 }

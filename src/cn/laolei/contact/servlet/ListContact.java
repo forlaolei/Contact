@@ -26,10 +26,14 @@ public class ListContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ContactServiceImpl daoService = new ContactServiceImpl();
-        List<Contact> list = daoService.findAll();
-        //session+重定向 保证别人无法访问
+        String userName = request.getParameter("userName");
+        List<Contact> list = daoService.findAll(userName);
         HttpSession session = request.getSession();
         session.setAttribute("list", list);
-        response.sendRedirect(request.getContextPath() + "/ListContact.jsp");
+        // 重定向会新建request
+        // response.sendRedirect(request.getContextPath() + "/ListContact.jsp");
+        request.setAttribute("userName", userName);
+        request.getRequestDispatcher("/ListContact.jsp").forward(request, response);
+
     }
 }

@@ -36,15 +36,15 @@
             <td width="300px">
                     <%-- 传递请求参数 --%>
                 <a href="${pageContext.request.contextPath}/UpdateContact.jsp?id=${contact.id}&name=${contact.name}&
-age=${contact.age}&gender=${contact.gender}&phone=${contact.phone}&qq=${contact.qq}&email=${contact.email}">修改</a>
-                <a href="${pageContext.request.contextPath}/DeleteContact?id=${contact.id}">&nbsp;删除</a>
+age=${contact.age}&gender=${contact.gender}&phone=${contact.phone}&qq=${contact.qq}&email=${contact.email}&userName=${requestScope.userName}">修改</a>
+                <a href="${pageContext.request.contextPath}/DeleteContact?id=${contact.id}&userName=${requestScope.userName}">&nbsp;删除</a>
             </td>
         </tr>
     </c:forEach>
     <tr align="center">
         <td align="center" colspan="8">
-            <a href="${pageContext.request.contextPath}/addContact.jsp?">[添加联系人]</a>
-            <a href="${pageContext.request.contextPath}/QueryContact.jsp">&nbsp;&nbsp;&nbsp;[查询联系人]</a>
+            <a href="${pageContext.request.contextPath}/addContact.jsp?userName=${requestScope.userName}">[添加联系人]</a>
+            <a href="${pageContext.request.contextPath}/QueryContact.jsp?userName=${requestScope.userName}">&nbsp;&nbsp;&nbsp;[查询联系人]</a>
         </td>
     </tr>
 </table>

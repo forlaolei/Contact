@@ -12,7 +12,8 @@
     <title>修改联系人</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/UpdateContact" method="post">
+<form action="${pageContext.request.contextPath}/UpdateContact?userName=${pageContext.request.getParameter("userName")}"
+      method="post">
     <table border="1" align="center" width="400px">
         <tr>
             <td>
