@@ -31,7 +31,7 @@ public interface ContactDao {
     void deleteContact(int id);
 
     /**
-     * 通过id查找联系人
+     * 通过name查找联系人
      *
      * @param name
      * @return

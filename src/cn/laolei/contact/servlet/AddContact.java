@@ -30,14 +30,21 @@ public class AddContact extends HttpServlet {
         String email = request.getParameter("email");
         Contact contact = new Contact();
         contact.setName(name);
-        contact.setAge(Integer.parseInt(age));
-        contact.setGender(gender);
-        contact.setPhone(phone);
-        contact.setQq(qq);
-        contact.setEmail(email);
-        ContactServiceImpl service = new ContactServiceImpl();
-        service.addContact(contact);
-        // 重定向
-        response.sendRedirect(request.getContextPath() + "/ListContact");
-    }
+        try {
+            contact.setAge(Integer.parseInt(age));
+        } catch (Exception e) {
+            response.sendRedirect(request.getContextPath() + "/AgeException.jsp");
+            e.printStackTrace();
+            return;
+        }
+            contact.setGender(gender);
+            contact.setPhone(phone);
+            contact.setQq(qq);
+            contact.setEmail(email);
+            ContactServiceImpl service = new ContactServiceImpl();
+            service.addContact(contact);
+            // 重定向
+            response.sendRedirect(request.getContextPath() + "/ListContact");
+        }
+
 }
